@@ -16,9 +16,11 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import com.andrei.kafka.producer.core.CustomMessage;
 import com.andrei.kafka.producer.core.CustomMessageProducer;
 import com.andrei.kafka.producer.core.SimpleMessageProducer;
-import com.andrei.kafka.producer.core.CustomMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * Kafka producer configuration class.
@@ -52,7 +54,11 @@ public class ProducerConfiguration {
 		configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapAddress);
 		configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-		return new DefaultKafkaProducerFactory<>(configProps);
+
+		DefaultKafkaProducerFactory<String, CustomMessage> factory = new DefaultKafkaProducerFactory<>(configProps);
+		// Override {@link ObjectMapper} to alow serialization of Java 8 types.
+		factory.setValueSerializer(new JsonSerializer<>(objectMapper()));
+		return factory;
 	}
 
 	@Bean
@@ -68,5 +74,12 @@ public class ProducerConfiguration {
 	@Bean
 	public CustomMessageProducer customMessageProducer() {
 		return new CustomMessageProducer();
+	}
+
+	@Bean
+	public ObjectMapper objectMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		return mapper;
 	}
 }
