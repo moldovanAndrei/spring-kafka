@@ -57,7 +57,10 @@ public class ProducerConfiguration {
 
 		DefaultKafkaProducerFactory<String, CustomMessage> factory = new DefaultKafkaProducerFactory<>(configProps);
 		// Override {@link ObjectMapper} to alow serialization of Java 8 types.
-		factory.setValueSerializer(new JsonSerializer<>(objectMapper()));
+		JsonSerializer serializer = new JsonSerializer<>(objectMapper());
+		// Remove type info, so the client can deserialize the object.
+		serializer.setAddTypeInfo(false);
+		factory.setValueSerializer(serializer);
 		return factory;
 	}
 

@@ -24,7 +24,7 @@ public class ConsumerListener {
 	 * @param message
 	 *            the string message.
 	 */
-	@KafkaListener(topics = "${message.topic.name}", group = "message", containerFactory = "messageKafkaListenerContainerFactory")
+	@KafkaListener(topics = "${message.topic.name}", groupId = "message", containerFactory = "messageKafkaListenerContainerFactory")
 	public void listenGroupSimple(String message) {
 		System.out.println("Received message from simple: " + message);
 		this.simpleLatch.countDown();
@@ -36,7 +36,7 @@ public class ConsumerListener {
 	 * @param customMessage
 	 *            the object message.
 	 */
-	@KafkaListener(topics = "${custom.topic.name}", group = "custom", containerFactory = "customKafkaListenerContainerFactory")
+	@KafkaListener(topics = "${custom.topic.name}", groupId = "custom", containerFactory = "customKafkaListenerContainerFactory")
 	public void listenGroupCustom(CustomMessage customMessage) {
 		System.out.println("Received message from custom: " + customMessage);
 		this.customLatch.countDown();

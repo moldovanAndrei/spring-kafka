@@ -61,6 +61,7 @@ public class ConsumerConfiguration {
 				properties);
 		// Override object mapper to include the java time module.
 		consumerFactory.setValueDeserializer(new JsonDeserializer<>(CustomMessage.class, objectMapper()));
+
 		ConcurrentKafkaListenerContainerFactory<String, CustomMessage> listenerContainerFactory = new ConcurrentKafkaListenerContainerFactory<>();
 		listenerContainerFactory.setConsumerFactory(consumerFactory);
 
