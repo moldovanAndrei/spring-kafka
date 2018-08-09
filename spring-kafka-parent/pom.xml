@@ -9,13 +9,15 @@
     <modules>
         <module>spring-kafka-producer</module>
         <module>spring-kafka-consumer</module>
-        <module>kafta-streams-wordcount</module>
+        <module>spring-kafka-datagenerator</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.0.0.RC2</spring.boot.version>
         <spring.kafka.version>2.1.2.RELEASE</spring.kafka.version>
         <java.version>1.8</java.version>
+        <avro.version>1.8.2</avro.version>
+        <bijection.version>0.9.5</bijection.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
@@ -39,21 +41,30 @@
                 <version>18.0</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.boot.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring.kafka.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.11</artifactId>
+                <version>0.10.0.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>bijection-avro_2.11</artifactId>
+                <version>${bijection.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -67,7 +78,6 @@
             </snapshots>
         </repository>
     </repositories>
-    
     <build>
         <pluginManagement>
             <plugins>

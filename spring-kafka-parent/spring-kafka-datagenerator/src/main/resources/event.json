@@ -1,0 +1,16 @@
+{
+	"namespace": "org.spring.kafka.datagenerator.data.avro",
+	"type": "record", "name": "AvroEvent",
+	"fields": [
+		{"name": "id", "type": "long"},
+		{"name": "type", "type": "string"},
+		{"name": "gps", "type": {
+			"namespace": "org.spring.kafka.datagenerator.data.avro",
+			"type": "record", "name": "AvroGps",
+			"fields":[
+				{"name": "long", "type": "double"},
+				{"name": "lat", "type": "double"}
+			]}	
+		}
+	]
+}
