@@ -1,6 +1,3 @@
-/*
- * spring-kafka-consumer:SimpleMessageConsumer.java
- */
 package com.andrei.kafka.consumer.core;
 
 import java.util.concurrent.CountDownLatch;

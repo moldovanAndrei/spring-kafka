@@ -1,6 +1,3 @@
-/*
- * spring-kafka-consumer:ConsumerConfig.java
- */
 package com.andrei.kafka.consumer.config;
 
 import java.util.HashMap;

@@ -1,6 +1,3 @@
-/*
- * spring-kafka-consumer:ConsumerApplication.java
- */
 package com.andrei.kafka.consumer;
 
 import org.springframework.boot.SpringApplication;

@@ -1,6 +1,3 @@
-/*
- * spring-kafka-producer:ProducerMessage.java
- */
 package com.andrei.kafka.consumer.core;
 
 import java.time.LocalDateTime;
